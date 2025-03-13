@@ -3,6 +3,9 @@
 #include "Muniz_GAM415Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "components/DecalComponent.h"
+#include "kismet/GameplayStatics.h"
 
 AMuniz_GAM415Projectile::AMuniz_GAM415Projectile() 
 {
@@ -16,8 +19,12 @@ AMuniz_GAM415Projectile::AMuniz_GAM415Projectile()
 	CollisionComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
 	CollisionComp->CanCharacterStepUpOn = ECB_No;
 
+	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile Mesh"));
+	
+
 	// Set as root component
 	RootComponent = CollisionComp;
+	ProjectileMesh->SetupAttachment(CollisionComp);
 
 	// Use a ProjectileMovementComponent to govern this projectile's movement
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
@@ -39,5 +46,21 @@ void AMuniz_GAM415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherA
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 
 		Destroy();
+	}
+
+	if (HitComp != nullptr)
+	{
+		float randNumX = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f);
+		float randNumY = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f);
+		float randNumZ = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f);
+		float frameNum = UKismetMathLibrary::RandomFloatInRange(0.f, 3.f);
+
+		FVector4 randColor = FVector4(randNumX, randNumY, randNumZ, 1.f);
+
+		auto Decal = UGameplayStatics::SpawnDecalAtLocation(GetWorld(), baseMaterial, FVector(UKismetMathLibrary::RandomFloatInRange(20.f, 40.f)), Hit.Location, Hit.Normal.Rotation(), 0.f);
+		auto matInstance = Decal->CreateDynamicMaterialInstance();
+
+		matInstance->SetVectorParameterValue("Color", randColor);
+		matInstance->SetScalarParameterValue("Frame", frameNum);
 	}
 }
