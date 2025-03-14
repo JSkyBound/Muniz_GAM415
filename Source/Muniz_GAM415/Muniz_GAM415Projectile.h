@@ -28,8 +28,20 @@ class AMuniz_GAM415Projectile : public AActor
 	UPROPERTY(EditAnywhere)
 	UMaterial* baseMaterial;
 
+	UPROPERTY()
+	FLinearColor randColor;
+
+	UPROPERTY(EditAnywhere)
+	UMaterialInterface* projectileMaterial;
+
+	UPROPERTY()
+	UMaterialInstanceDynamic* dmiMat;
 public:
 	AMuniz_GAM415Projectile();
+protected:
+	virtual void BeginPlay();
+
+public:
 
 	/** called when projectile hits something */
 	UFUNCTION()
