@@ -23,19 +23,19 @@ class AMuniz_GAM415Projectile : public AActor
 	UProjectileMovementComponent* ProjectileMovement;
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* ProjectileMesh;
+		UStaticMeshComponent* ProjectileMesh;
 
 	UPROPERTY(EditAnywhere)
-	UMaterial* baseMaterial;
+		UMaterial* baseMaterial;
 
 	UPROPERTY()
-	FLinearColor randColor;
+		FLinearColor randColor;
 
 	UPROPERTY(EditAnywhere)
-	UMaterialInterface* projectileMaterial;
+		UMaterialInterface* projectileMaterial;
 
 	UPROPERTY()
-	UMaterialInstanceDynamic* dmiMat;
+		UMaterialInstanceDynamic* dmiMat;
 public:
 	AMuniz_GAM415Projectile();
 protected:
