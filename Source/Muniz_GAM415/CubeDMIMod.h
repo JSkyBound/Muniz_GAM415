@@ -7,7 +7,9 @@
 #include "Components/BoxComponent.h"
 #include "CubeDMIMod.generated.h"
 
+class UNiagaraSystem;
 UCLASS()
+
 class MUNIZ_GAM415_API ACubeDMIMod : public AActor
 {
 	GENERATED_BODY()
@@ -32,6 +34,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* baseMesh;
+
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* colorParticle;
 
 	UFUNCTION()
 		void OnOverlapBegin(class UPrimitiveComponent* overlappedComp, class AActor* otherActor, class UPrimitiveComponent* otherComp, int32 otherBodyIndex, bool bFromSweep, const FHitResult& sweepResult);

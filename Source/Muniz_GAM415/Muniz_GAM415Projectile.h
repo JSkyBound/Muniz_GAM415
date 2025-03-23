@@ -8,6 +8,7 @@
 
 class USphereComponent;
 class UProjectileMovementComponent;
+class UNiagaraSystem;
 
 UCLASS(config=Game)
 class AMuniz_GAM415Projectile : public AActor
@@ -36,6 +37,12 @@ class AMuniz_GAM415Projectile : public AActor
 
 	UPROPERTY()
 		UMaterialInstanceDynamic* dmiMat;
+
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* colorParticle;
+
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* muzzleSpark;
 public:
 	AMuniz_GAM415Projectile();
 protected:
