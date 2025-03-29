@@ -8,7 +8,7 @@
 #include "kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
-
+#include "PerlinProcTerrain.h"
 
 
 
@@ -91,6 +91,13 @@ void AMuniz_GAM415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherA
 			ProjectileMesh->DestroyComponent();
 			CollisionComp->BodyInstance.SetCollisionProfileName("NoCollision");
 			
+		}
+
+		APerlinProcTerrain* procTerrain = Cast<APerlinProcTerrain>(OtherActor);
+
+		if (procTerrain)
+		{
+			procTerrain->AlterMesh(Hit.ImpactPoint);
 		}
 	}
 }

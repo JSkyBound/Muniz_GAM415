@@ -13,6 +13,7 @@ AProcMeshStatic::AProcMeshStatic()
 	procMesh = CreateDefaultSubobject<UProceduralMeshComponent>(TEXT("Procedural Mesh"));
 	baseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base Mesh"));
 
+	//set procMesh to Root Component
 	RootComponent = procMesh;
 	baseMesh->SetupAttachment(procMesh);
 
@@ -44,6 +45,7 @@ void AProcMeshStatic::Tick(float DeltaTime)
 
 }
 
+//Assigns procMesh data
 void AProcMeshStatic::GetMeshData()
 {
 	UStaticMesh* mesh = baseMesh->GetStaticMesh();
@@ -56,6 +58,7 @@ void AProcMeshStatic::GetMeshData()
 	}
 }
 
+//Creates procMesh if baseMesh is assigned
 void AProcMeshStatic::CreateMesh()
 {
 	if (baseMesh)
