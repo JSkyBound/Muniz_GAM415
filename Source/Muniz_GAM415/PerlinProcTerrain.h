@@ -18,6 +18,7 @@ public:
 	// Sets default values for this actor's properties
 	APerlinProcTerrain();
 
+	//Modifiable values of the procedural terrain
 	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0))
 		int xSize = 0;
 
@@ -58,6 +59,8 @@ public:
 	void AlterMesh(FVector impactPoint);
 
 private:
+
+	//values depend on the public variables to create the mesh
 	UProceduralMeshComponent* procMesh;
 	TArray<FVector> vertices;
 	TArray<int> triangles;

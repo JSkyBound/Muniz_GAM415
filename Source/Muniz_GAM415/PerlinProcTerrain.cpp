@@ -11,6 +11,7 @@ APerlinProcTerrain::APerlinProcTerrain()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	//Sets the procMesh as the rootcomponent
 	procMesh = CreateDefaultSubobject<UProceduralMeshComponent>(TEXT("Procedural Mesh"));
 	procMesh->SetupAttachment(GetRootComponent());
 	
@@ -22,6 +23,7 @@ void APerlinProcTerrain::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//Creates the mesh at runtime
 	CreateVertices();
 	CreateTriangles();
 	procMesh->CreateMeshSection(sectionID, vertices, triangles, normals, UV0, upVertexColors, TArray<FProcMeshTangent>(), true);
@@ -35,6 +37,8 @@ void APerlinProcTerrain::Tick(float DeltaTime)
 
 }
 
+
+//This allows us to alter the terrain when another actor comes into contact with it. Like a projectile for example.
 void APerlinProcTerrain::AlterMesh(FVector impactPoint)
 {
 	for (int i = 0; i < vertices.Num(); i++)
