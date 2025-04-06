@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "Components/SceneCaptureComponent2D.h"
+#include "Components/ArrowComponent.h"
 #include "Portals.generated.h"
 
 
@@ -31,6 +32,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* PortalMesh;
+
+	UPROPERTY(EditAnywhere)
+		UArrowComponent* RootArrow;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USceneCaptureComponent2D* SceneCapture;;
