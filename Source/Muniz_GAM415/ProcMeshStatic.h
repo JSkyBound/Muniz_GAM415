@@ -49,6 +49,9 @@ public:
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* baseMesh;
 
+	UFUNCTION()
+	void AlterMesh(FVector impactPoint);
+
 private:
 	UProceduralMeshComponent* procMesh;
 	void GetMeshData();

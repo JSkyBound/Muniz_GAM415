@@ -45,6 +45,20 @@ void AProcMeshStatic::Tick(float DeltaTime)
 
 }
 
+void AProcMeshStatic::AlterMesh(FVector impactPoint)
+{
+	for (int i = 0; i < Vertices.Num(); i++)
+	{
+		FVector tempVector = impactPoint - this->GetActorLocation();
+
+		if (FVector(Vertices[i] - tempVector).Size() < radius)
+		{
+			procMesh->UpdateMeshSection(0, Vertices, Normals, UV0, upVertexColors, TArray<FProcMeshTangent>());
+		}
+	}
+	
+}
+
 //Assigns procMesh data
 void AProcMeshStatic::GetMeshData()
 {

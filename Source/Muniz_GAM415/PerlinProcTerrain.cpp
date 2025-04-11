@@ -45,7 +45,7 @@ void APerlinProcTerrain::AlterMesh(FVector impactPoint)
 	{
 		FVector tempVector = impactPoint - this->GetActorLocation();
 
-		if (FVector(vertices[i] - tempVector).Size() > radius)
+		if (FVector(vertices[i] - tempVector).Size() < radius)
 		{
 			vertices[i] = vertices[i] - depth;
 			procMesh->UpdateMeshSection(sectionID, vertices, normals, UV0, upVertexColors, TArray<FProcMeshTangent>());

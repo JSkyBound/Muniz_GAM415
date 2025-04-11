@@ -31,10 +31,10 @@ public:
 	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0))
 		float noiseScale = 1.0f;
 
-	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0.00001))
+	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0.000001))
 		float terrainScale = 1.0f;
 
-	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0.00001))
+	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0.000001))
 		float UVScale = 0;
 
 	UPROPERTY(EditAnywhere)
