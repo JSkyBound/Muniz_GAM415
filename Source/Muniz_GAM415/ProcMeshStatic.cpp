@@ -51,7 +51,7 @@ void AProcMeshStatic::AlterMesh(FVector impactPoint)
 	{
 		FVector tempVector = impactPoint - this->GetActorLocation();
 
-		if (FVector(Vertices[i] - tempVector).Size() < radius)
+		if (FVector(Vertices[i] - tempVector).Size())
 		{
 			procMesh->UpdateMeshSection(0, Vertices, Normals, UV0, upVertexColors, TArray<FProcMeshTangent>());
 		}
