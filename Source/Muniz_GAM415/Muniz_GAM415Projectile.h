@@ -14,6 +14,7 @@ UCLASS(config=Game)
 class AMuniz_GAM415Projectile : public AActor
 {
 	GENERATED_BODY()
+	
 
 	/** Sphere collision component */
 	UPROPERTY(VisibleDefaultsOnly, Category=Projectile)
@@ -49,6 +50,9 @@ protected:
 	virtual void BeginPlay();
 
 public:
+	
+	UPROPERTY()
+	bool isTeleporting;
 
 	/** called when projectile hits something */
 	UFUNCTION()

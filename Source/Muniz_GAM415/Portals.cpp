@@ -3,6 +3,8 @@
 
 #include "Portals.h"
 #include "Muniz_GAM415Character.h"
+#include "Muniz_GAM415Projectile.h"
+#include "Engine/StaticMeshActor.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -35,6 +37,7 @@ void APortals::BeginPlay()
 {
 	Super::BeginPlay();
 	BoxComp->OnComponentBeginOverlap.AddDynamic(this, &APortals::OnOverlapBegin);
+	BoxComp->OnComponentHit.AddDynamic(this, &APortals::OnHit);
 	PortalMesh->SetHiddenInSceneCapture(true);
 	PortalMesh->CastShadow = false;
 
@@ -52,7 +55,7 @@ void APortals::Tick(float DeltaTime)
 
 }
 
-//If the player character overlaps the portal it sets the location to the other portals location based on the rootArrrow
+//If the player character overlaps the portal it sets the location to the other portals location based on the rootArrow
 void APortals::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
 	class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -74,7 +77,41 @@ void APortals::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class A
 			}
 		}
 	}
+	
 }
+
+void APortals::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	FVector NormalImpulse, const FHitResult& Hit)
+{
+	AMuniz_GAM415Projectile* Projectile = Cast<AMuniz_GAM415Projectile>(OtherActor);
+	if (Projectile)
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "This is a projectile");
+		}
+		if (OtherPortal)
+		{
+			if (!Projectile->isTeleporting)
+			{
+				Projectile->isTeleporting = true;
+				FVector loc = OtherPortal->RootArrow->GetComponentLocation();
+				Projectile->SetActorLocation(loc);
+
+				FTimerHandle TimerHandle;
+				FTimerDelegate TimerDel;
+				TimerDel.BindUFunction(this, "SetBool", Projectile);
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle, TimerDel, 1, false);
+				if (GEngine)
+				{
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Teleported!");
+				}
+			}
+		}
+		
+	}
+}
+
 
 //sets isTeleporting to false which allows teleporting again after
 void APortals::SetBool(AMuniz_GAM415Character* PlayerChar)
