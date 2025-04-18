@@ -7,6 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "Components/SceneCaptureComponent2D.h"
+#include "PaperSprite.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Muniz_GAM415Character.generated.h"
 
@@ -53,7 +54,7 @@ public:
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* LookAction;
-
+	
 	//Top-down view of current character location.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USpringArmComponent* SpringArm;
@@ -64,6 +65,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UTextureRenderTarget2D* RenderTarget;
 
+	//PlayerIcon
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	//UPaperSprite* PlayerSprite;
 protected:
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
