@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Engine/TextureRenderTarget2D.h"
+#include "Components/SceneCaptureComponent2D.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Muniz_GAM415Character.generated.h"
 
 class UInputComponent;
@@ -50,6 +53,16 @@ public:
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* LookAction;
+
+	//Top-down view of current character location.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USpringArmComponent* SpringArm;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USceneCaptureComponent2D* SceneCapture;;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UTextureRenderTarget2D* RenderTarget;
 
 protected:
 	/** Called for movement input */
