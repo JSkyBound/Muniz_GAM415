@@ -10,7 +10,6 @@
 #include "NiagaraComponent.h"
 #include "PerlinProcTerrain.h"
 #include "Portals.h"
-#include "EntitySystem/MovieSceneEntitySystemRunner.h"
 
 
 AMuniz_GAM415Projectile::AMuniz_GAM415Projectile() 

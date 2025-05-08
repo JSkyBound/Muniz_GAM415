@@ -36,14 +36,14 @@ AMuniz_GAM415Character::AMuniz_GAM415Character()
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 
-	//Create scene capture component and attach to playermesh for tracking
+	//Create scene capture component and attach to capsulecomp for tracking
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SceneCapture = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("SceneCapture"));
 	SpringArm->SetupAttachment(GetCapsuleComponent());
 	SceneCapture->SetupAttachment(SpringArm);
 
-	//Create PlayerSprite and attach to spring arm
-	//PlayerSprite = CreateDefaultSubobject<UPaperSprite>("PlayerSprite");
+	//Create PlayerSprite and attach to spring arm // Done in Blueprint due to setup attachment function nonexistent 
+	//Playfunction PaperSprite = CreateDefaultSubobject<UPaperSprite>("PlayerSprite");
 	
 	//Mesh1P->SetRelativeRotation(FRotator(0.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));

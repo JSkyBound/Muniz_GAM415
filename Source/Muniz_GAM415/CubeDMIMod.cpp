@@ -3,7 +3,6 @@
 
 #include "CubeDMIMod.h"
 #include "Muniz_GAM415Character.h"
-#include "Chaos/Deformable/ChaosDeformableCollisionsProxy.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
