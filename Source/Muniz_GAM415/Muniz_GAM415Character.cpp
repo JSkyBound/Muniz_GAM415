@@ -10,6 +10,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Engine/LocalPlayer.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -72,6 +73,10 @@ void AMuniz_GAM415Character::SetupPlayerInputComponent(UInputComponent* PlayerIn
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMuniz_GAM415Character::Look);
+
+		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Triggered, this, &AMuniz_GAM415Character::Dash);
+		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Completed, this, &AMuniz_GAM415Character::StopDashing);
+
 	}
 	else
 	{
@@ -105,3 +110,28 @@ void AMuniz_GAM415Character::Look(const FInputActionValue& Value)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
+
+void AMuniz_GAM415Character::Dash(const FInputActionValue& Value)
+{
+	//This should give the player a sudden increase in speed in the current direction they are facing.
+	//valid in air as well
+	//For air dash check if player is in air as the values will be slightly different than the ground dash.
+	isDashing = Value.Get<bool>();
+	if (!isDashing)
+	{
+		isDashing = true;
+		GetCharacterMovement()->MaxWalkSpeed += this->DashSpeed;
+	}
+
+	
+
+}
+
+void AMuniz_GAM415Character::StopDashing(const FInputActionValue& Value)
+{
+	//reset
+	GetCharacterMovement()->MaxWalkSpeed = this->DefaultWalkingSpeed;
+	isDashing = false;
+}
+
+

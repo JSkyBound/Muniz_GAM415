@@ -83,6 +83,7 @@ void APortals::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class A
 void APortals::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	FVector NormalImpulse, const FHitResult& Hit)
 {
+
 	AMuniz_GAM415Projectile* Projectile = Cast<AMuniz_GAM415Projectile>(OtherActor);
 	if (Projectile)
 	{
@@ -95,8 +96,12 @@ void APortals::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiv
 			if (!Projectile->isTeleporting)
 			{
 				Projectile->isTeleporting = true;
-				FVector loc = OtherPortal->RootArrow->GetComponentLocation();
+				//Keeping original trajectory as it goes through the portal
+				FRotator originalRotation = Projectile->GetActorRotation();
+				FVector offset = Projectile->GetActorLocation() - RootArrow->GetComponentLocation();
+				FVector loc = OtherPortal->RootArrow->GetComponentLocation() + offset;
 				Projectile->SetActorLocation(loc);
+				Projectile->SetActorRotation(originalRotation);
 
 				FTimerHandle TimerHandle;
 				FTimerDelegate TimerDel;
